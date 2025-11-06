@@ -19,8 +19,8 @@ const EditableItem: React.FC<{
 }> = ({ label, name, value, onChange, type = 'text', colSpan = 1 }) => {
     const spanClass = {
         1: 'sm:col-span-1',
-        2: 'sm:col-span-2',
-        3: 'sm:col-span-3',
+        2: 'sm:col-span-2 lg:col-span-2',
+        3: 'sm:col-span-2 lg:col-span-3',
     }[colSpan] || 'sm:col-span-1';
     
     return (
@@ -89,30 +89,30 @@ const ClientDataModal: React.FC<ClientDataModalProps> = ({ invoice, onClose, onS
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4" onClick={onClose}>
       <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-4 md:p-6 border-b border-gray-200">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-800">Detalles de la Factura</h2>
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800">Detalles de la Factura</h2>
               <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
-                  <XCircleIcon className="w-8 h-8" />
+                  <XCircleIcon className="w-6 h-6 md:w-8 md:h-8" />
               </button>
             </div>
             {formData.folioFiscal && <p className="text-sm text-gray-500 mt-1 font-mono">Folio Fiscal: {formData.folioFiscal}</p>}
         </div>
         
-        <div className="p-6 overflow-y-auto flex-grow">
-            <div className="space-y-8">
+        <div className="p-4 md:p-6 overflow-y-auto flex-grow">
+            <div className="space-y-6 md:space-y-8">
                 {/* Client Data Section */}
                 <section>
-                    <div className="flex justify-between items-center border-b-2 border-gray-300 pb-3 mb-4">
-                        <h3 className="text-xl font-bold text-gray-800">Datos del Cliente</h3>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b-2 border-gray-300 pb-3 mb-4 gap-2">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-800">Datos del Cliente</h3>
                         {canEdit && !isEditingClient && !isCancellingFolio && (
-                            <button onClick={() => setIsEditingClient(true)} className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 ml-4 px-3 py-1 rounded-md hover:bg-blue-50 transition-colors">
+                            <button onClick={() => setIsEditingClient(true)} className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 px-3 py-1 rounded-md hover:bg-blue-50 transition-colors self-start sm:self-auto">
                                 <EditIcon className="w-4 h-4" />
                                 <span>Editar</span>
                             </button>
                         )}
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-4 md:gap-y-5">
                         <DataItem label="Nombre" value={formData.clientName} />
                         {isEditingClient ? (
                             <EditableItem label="Correo Electrónico" name="email" value={formData.email} onChange={handleChange} type="email" />
@@ -132,16 +132,16 @@ const ClientDataModal: React.FC<ClientDataModalProps> = ({ invoice, onClose, onS
 
                 {/* Fiscal Data Section */}
                 <section>
-                    <div className="flex justify-between items-center border-b-2 border-gray-300 pb-3 mb-4">
-                        <h3 className="text-xl font-bold text-gray-800">Datos Fiscales</h3>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b-2 border-gray-300 pb-3 mb-4 gap-2">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-800">Datos Fiscales</h3>
                         {canEdit && !isEditingFiscal && (
-                            <button onClick={() => setIsEditingFiscal(true)} className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 ml-4 px-3 py-1 rounded-md hover:bg-blue-50 transition-colors">
+                            <button onClick={() => setIsEditingFiscal(true)} className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 px-3 py-1 rounded-md hover:bg-blue-50 transition-colors self-start sm:self-auto">
                                 <EditIcon className="w-4 h-4" />
                                 <span>Editar</span>
                             </button>
                         )}
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 md:gap-x-8 gap-y-4 md:gap-y-5">
                         {isEditingFiscal ? (
                             <EditableItem label="Nombre o Razón Social" name="razonSocial" value={formData.razonSocial} onChange={handleChange} colSpan={2}/>
                         ) : (
@@ -172,16 +172,16 @@ const ClientDataModal: React.FC<ClientDataModalProps> = ({ invoice, onClose, onS
 
                 {/* Vehicle Data Section */}
                 <section>
-                    <div className="flex justify-between items-center border-b-2 border-gray-300 pb-3 mb-4">
-                        <h3 className="text-xl font-bold text-gray-800">Datos del Vehículo</h3>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center border-b-2 border-gray-300 pb-3 mb-4 gap-2">
+                        <h3 className="text-lg md:text-xl font-bold text-gray-800">Datos del Vehículo</h3>
                          {canEdit && !isEditingVehicle && !isCancellingFolio && (
-                            <button onClick={() => setIsEditingVehicle(true)} className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 ml-4 px-3 py-1 rounded-md hover:bg-blue-50 transition-colors">
+                            <button onClick={() => setIsEditingVehicle(true)} className="flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-800 px-3 py-1 rounded-md hover:bg-blue-50 transition-colors self-start sm:self-auto">
                                 <EditIcon className="w-4 h-4" />
                                 <span>Editar</span>
                             </button>
                         )}
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 md:gap-x-8 gap-y-4 md:gap-y-5">
                         <DataItem label="SKU" value={formData.sku} />
                         <DataItem label="Descripción" value={formData.description} colSpan={2} />
                         <DataItem label="Cantidad" value={String(formData.quantity)} />
@@ -208,27 +208,27 @@ const ClientDataModal: React.FC<ClientDataModalProps> = ({ invoice, onClose, onS
             </div>
         </div>
 
-        <div className="bg-gray-50 px-6 py-4 rounded-b-lg flex justify-end items-center gap-4 border-t border-gray-200">
+        <div className="bg-gray-50 px-4 md:px-6 py-4 rounded-b-lg flex flex-col sm:flex-row justify-end items-center gap-4 border-t border-gray-200">
             {invoice.status === 'Timbrada' && !isEditingAny && (
                 <button
                     type="button"
                     onClick={handleStartCancellation}
-                    className="py-2 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors mr-auto"
+                    className="w-full sm:w-auto py-2 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors sm:mr-auto order-2 sm:order-1"
                 >
                     Cancelar Folio Fiscal
                 </button>
             )}
             {isEditingAny ? (
-            <>
+            <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-2 order-1 sm:order-2">
               <button type="button" onClick={handleCancel} className="py-2 px-6 bg-gray-200 text-gray-800 font-semibold rounded-lg hover:bg-gray-300 transition-colors">
                 Cancelar
               </button>
               <button type="button" onClick={handleSave} className="py-2 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
                 Guardar Cambios
               </button>
-            </>
+            </div>
           ) : (
-            <button onClick={onClose} className="py-2 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+            <button onClick={onClose} className="w-full sm:w-auto py-2 px-6 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors order-1 sm:order-2">
                 Cerrar
             </button>
           )}
@@ -248,8 +248,8 @@ interface DataItemProps {
 const DataItem: React.FC<DataItemProps> = ({ label, value, colSpan = 1 }) => {
     const spanClass = {
         1: 'sm:col-span-1',
-        2: 'sm:col-span-2',
-        3: 'sm:col-span-3',
+        2: 'sm:col-span-2 lg:col-span-2',
+        3: 'sm:col-span-2 lg:col-span-3',
     }[colSpan] || 'sm:col-span-1';
 
     return (

@@ -80,8 +80,8 @@ const InvoiceTrackingPage: React.FC<InvoiceTrackingPageProps> = ({ onBack }) => 
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow-md sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between mb-4">
-                <h1 className="text-3xl font-bold text-gray-800">Seguimiento de Facturas Motos</h1>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800">Seguimiento de Facturas Motos</h1>
                 <button
                     onClick={onBack}
                     className="flex items-center gap-2 bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
@@ -90,7 +90,7 @@ const InvoiceTrackingPage: React.FC<InvoiceTrackingPageProps> = ({ onBack }) => 
                     <span>Volver</span>
                 </button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 items-end">
                 <div>
                   <label className="font-semibold text-gray-600 mb-1 block">Tipo de consulta:</label>
                   <select
@@ -152,7 +152,80 @@ const InvoiceTrackingPage: React.FC<InvoiceTrackingPageProps> = ({ onBack }) => 
       <main className="container mx-auto p-4">
         <div className="max-w-screen-xl mx-auto">
             <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="overflow-x-auto">
+            {/* Mobile Card Layout */}
+            <div className="block md:hidden">
+                {!hasSearched ? (
+                    <div className="text-center py-16 text-gray-500 px-4">
+                        <SearchIcon className="w-12 h-12 mx-auto mb-2 text-gray-400" />
+                        <p className="text-lg">Por favor, ingrese un criterio y presione "Buscar" para ver las facturas.</p>
+                    </div>
+                ) : searchedInvoices.length > 0 ? (
+                    <div className="space-y-4 p-4">
+                        {searchedInvoices.map((invoice) => (
+                            <div key={invoice.id} className="bg-gray-50 rounded-lg p-4 border">
+                                <div className="space-y-3">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <p className="text-sm text-gray-500">Ticket</p>
+                                            <p className="font-semibold">{invoice.ticket}</p>
+                                        </div>
+                                        <StatusBadge status={invoice.status} />
+                                    </div>
+                                    
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <p className="text-sm text-gray-500">No. Venta</p>
+                                            <p className="font-semibold">{invoice.saleNumber}</p>
+                                        </div>
+                                        <div>
+                                            <p className="text-sm text-gray-500">Fecha Venta</p>
+                                            <p className="font-semibold">{invoice.saleDate}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <p className="text-sm text-gray-500">Cliente</p>
+                                        <button onClick={() => setViewingClient(invoice)} className="text-blue-600 hover:underline font-semibold capitalize">
+                                            {getClientShortName(invoice.clientName)}
+                                        </button>
+                                    </div>
+                                    
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <p className="text-sm text-gray-500">Entrega</p>
+                                            <DeliveryStatusBadge status={invoice.deliveryStatus} />
+                                        </div>
+                                        <div className="flex space-x-2">
+                                            <button
+                                              onClick={() => alert('se va a imprimir la factura y carta factura.')}
+                                              className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm"
+                                              title="Imprimir"
+                                            >
+                                                <PrintIcon className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                              onClick={() => alert('se enviara factura y carta factura.')}
+                                              className="flex items-center gap-1 text-blue-600 hover:text-blue-800 text-sm"
+                                              title="Enviar"
+                                            >
+                                                <MailIcon className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="text-center py-16 text-gray-500 px-4">
+                        <p className="text-lg font-semibold">No se encontraron facturas</p>
+                        <p>Intente con otros criterios de búsqueda.</p>
+                    </div>
+                )}
+            </div>
+            
+            {/* Desktop Table Layout */}
+            <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-sm text-left text-gray-600">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                     <tr>

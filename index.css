@@ -1,0 +1,105 @@
+/* Estilos responsivos personalizados para la aplicación de facturas */
+
+/* Mejoras generales para móviles */
+@media (max-width: 768px) {
+  /* Mejora la experiencia táctil en móviles */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Asegura que los botones tengan un tamaño mínimo táctil */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Mejora la legibilidad de texto en móviles */
+  body {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+
+  /* Mejora el scroll en elementos desbordados */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Asegura que los inputs sean accesibles en iOS */
+  input, select, textarea {
+    font-size: 16px; /* Previene zoom automático en iOS */
+  }
+}
+
+/* Animaciones suaves para transiciones */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Mejoras para el modal en móviles */
+@media (max-width: 640px) {
+  /* Asegura que el modal use toda la pantalla en móviles muy pequeños */
+  .modal-mobile {
+    margin: 8px;
+    max-height: calc(100vh - 16px);
+  }
+}
+
+/* Mejoras para tablas en móviles */
+@media (max-width: 768px) {
+  /* Oculta columnas menos importantes en móviles */
+  .table-mobile-hide {
+    display: none;
+  }
+}
+
+/* Mejoras para el footer toolbar en móviles */
+@media (max-width: 1024px) {
+  .footer-mobile-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .footer-mobile-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
+
+/* Mejoras para el grid responsivo */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Ajustes específicos para tablets */
+  .tablet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Utilidades adicionales para mejorar la UX móvil */
+.touch-manipulation {
+  touch-action: manipulation;
+}
+
+.prevent-zoom {
+  touch-action: pan-x pan-y;
+}
+
+/* Mejoras para componentes específicos */
+.mobile-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Estilos para mejor accesibilidad */
+.focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Mejora para botones activos en móviles */
+button:active {
+  transform: scale(0.98);
+}
+
+/* Mejora para elementos scrolleables */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
