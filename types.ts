@@ -1,0 +1,44 @@
+export type InvoiceStatus = 'Pendiente' | 'En proceso' | 'Timbrada' | 'Cancelada' | 'Generada' | 'No Generada';
+export type InvoiceType = 'fiscal-cliente' | 'generica';
+export type Gender = 'Masculino' | 'Femenino';
+export type DeliveryStatus = 'entregada' | 'pendiente' | 'cancelada';
+
+export interface Invoice {
+  id: number;
+  folioFiscal?: string;
+  status: InvoiceStatus;
+  deliveryStatus: DeliveryStatus;
+  invoiceType: InvoiceType;
+  invoice: string;
+  clientName: string;
+  razonSocial: string;
+  email: string;
+  phone: string;
+  motorNumber: string;
+  serialNumber: string;
+  saleDate: string;
+  deliveryDate: string;
+  statusChangeDate: string;
+  ticket: string;
+  saleNumber: string;
+  store: number | string;
+  comments: string;
+  rfc: string;
+  postalCode: string;
+  taxRegime: string;
+  cfdiUse: string;
+  birthDate: string;
+  curp: string;
+  gender: Gender;
+  sku: string;
+  description: string;
+  quantity: number;
+  salePrice: number;
+  brand: string;
+  model: string;
+  color: string;
+  year: number;
+  cylinderCapacity: string;
+  pedimento: string;
+  nci: string;
+}

@@ -1,0 +1,5 @@
+{
+  "name": " Facturas Raul",
+  "description": "Una aplicación para la gestión y seguimiento de facturas, con una interfaz de captura de artículos y un portal de búsqueda detallado.",
+  "requestFramePermissions": []
+}
